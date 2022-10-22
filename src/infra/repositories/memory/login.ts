@@ -1,0 +1,34 @@
+import { LoginModel } from 'app/models/login'
+import { LoginEntity } from 'core/entities/LoginEntity'
+import { LoginRepository } from 'core/repositories/login'
+
+const loginMemory: LoginModel[] = [
+  {
+    id: '1b481f95-a852-484a-be40-ef6653e37101',
+    email: 'test@test.com.br',
+    password: '1234'
+  }
+]
+
+export class LoginRepositoryMemory implements LoginRepository {
+  async create (login: LoginEntity): Promise<LoginModel> {
+    loginMemory.push(login)
+    return loginMemory[loginMemory.length - 1]
+  }
+
+  async valid (login: LoginEntity): Promise<boolean> {
+    if (!loginMemory.find(item => login.email === item.email)) return false
+    if (!loginMemory.find(item => login.password === item.password)) return false
+
+    return true
+  }
+
+  async update (login: LoginEntity): Promise<boolean> {
+    const index = loginMemory.findIndex(item => item.id === login.id)
+    if (index < 0) return false
+
+    loginMemory[index].password = login.password
+
+    return true
+  }
+}
