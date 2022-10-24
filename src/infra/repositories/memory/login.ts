@@ -1,6 +1,8 @@
+import { CreateLoginError } from '@core/repositories/error/login-error'
 import { LoginModel } from 'app/models/login'
 import { LoginEntity } from 'core/entities/LoginEntity'
 import { LoginRepository } from 'core/repositories/login'
+import { Either, left, right } from 'shared/errors/Either'
 
 const loginMemory: LoginModel[] = [
   {
@@ -11,9 +13,14 @@ const loginMemory: LoginModel[] = [
 ]
 
 export class LoginRepositoryMemory implements LoginRepository {
-  async create (login: LoginEntity): Promise<LoginModel> {
-    loginMemory.push(login)
-    return loginMemory[loginMemory.length - 1]
+  async create (login: LoginEntity): Promise<Either<CreateLoginError, LoginModel>> {
+    try {
+      loginMemory.push(login)
+      const newLogin = loginMemory[loginMemory.length - 1]
+      return right(newLogin)
+    } catch (error: any) {
+      return left(new CreateLoginError(error?.stack))
+    }
   }
 
   async valid (login: LoginEntity): Promise<boolean> {
