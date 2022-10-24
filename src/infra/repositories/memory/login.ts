@@ -1,4 +1,11 @@
-import { CreateLoginError, DeleteLoginError, UpdateLoginError, ValidLoginError } from '@core/repositories/error/login-error'
+import {
+  CreateLoginError,
+  DeleteLoginError,
+  FindAllLoginError,
+  FindByIdLoginError,
+  UpdateLoginError,
+  ValidLoginError
+} from '@core/repositories/error/login-error'
 import { LoginModel } from '@app/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
@@ -58,6 +65,23 @@ export class LoginRepositoryMemory implements LoginRepository {
       return right(true)
     } catch (error: any) {
       return left(new DeleteLoginError(error?.stack))
+    }
+  }
+
+  async findAll (): Promise<Either<FindAllLoginError, LoginEntity[]>> {
+    try {
+      return right(loginMemory)
+    } catch (error: any) {
+      return left(new FindAllLoginError(error?.stack))
+    }
+  }
+
+  async findById (id: string): Promise<Either<FindByIdLoginError, LoginEntity | null>> {
+    try {
+      const result = loginMemory.find(item => item.id === id) || null
+      return right(result)
+    } catch (error: any) {
+      return left(new FindByIdLoginError(error?.stack))
     }
   }
 }

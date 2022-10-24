@@ -5,7 +5,9 @@ import {
   CreateLoginError,
   DeleteLoginError,
   UpdateLoginError,
-  ValidLoginError
+  ValidLoginError,
+  FindAllLoginError,
+  FindByIdLoginError
 } from './error/login-error'
 
 export interface LoginRepository {
@@ -13,4 +15,6 @@ export interface LoginRepository {
   valid: (login: LoginEntity) => Promise<Either<ValidLoginError, boolean>>
   update: (login: LoginEntity) => Promise<Either<UpdateLoginError, boolean>>
   del: (id: string) => Promise<Either<DeleteLoginError, boolean>>
+  findAll: () => Promise<Either<FindAllLoginError, LoginEntity[]>>
+  findById: (id: string) => Promise<Either<FindByIdLoginError, LoginEntity | null>>
 }

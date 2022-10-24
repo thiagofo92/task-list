@@ -32,3 +32,10 @@ export class DeleteLoginError extends Error {
     this.name = 'DeleteLoginError'
   }
 }
+
+export class FindAllLoginError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'DeleteLoginError'
+  }
+}
