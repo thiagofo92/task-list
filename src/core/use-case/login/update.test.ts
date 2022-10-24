@@ -12,6 +12,6 @@ describe('# Login - Update', () => {
     }
     const result = await usecase.execute(login)
 
-    expect(result).toBeTruthy()
+    expect(result).toStrictEqual(true)
   })
 })

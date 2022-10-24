@@ -7,7 +7,8 @@ export default defineConfig({
     alias: {
       '@app': `${path}/app`,
       '@core': `${path}/core`,
-      '@infra': `${path}/infra`
+      '@infra': `${path}/infra`,
+      '@shared': `${path}/shared`
     }
   }
 })

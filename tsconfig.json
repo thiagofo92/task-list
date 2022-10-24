@@ -13,6 +13,9 @@
       ],
       "@infra/*": [
         "infra/*"
+      ],
+      "@shared/*": [
+        "shared/*"
       ]
     },                               
     "outDir": "dist",                              
