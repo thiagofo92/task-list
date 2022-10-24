@@ -1,4 +1,4 @@
-import { CreateLoginError } from '@core/repositories/error/login-error'
+import { CreateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
 import { LoginModel } from 'app/models/login'
 import { LoginEntity } from 'core/entities/LoginEntity'
 import { LoginRepository } from 'core/repositories/login'
@@ -30,12 +30,16 @@ export class LoginRepositoryMemory implements LoginRepository {
     return true
   }
 
-  async update (login: LoginEntity): Promise<boolean> {
-    const index = loginMemory.findIndex(item => item.id === login.id)
-    if (index < 0) return false
+  async update (login: LoginEntity): Promise<Either<UpdateLoginError, boolean>> {
+    try {
+      const index = loginMemory.findIndex(item => item.id === login.id)
+      if (index < 0) return right(false)
 
-    loginMemory[index].password = login.password
+      loginMemory[index].password = login.password
 
-    return true
+      return right(true)
+    } catch (error: any) {
+      return left(new UpdateLoginError(error?.stack))
+    }
   }
 }
