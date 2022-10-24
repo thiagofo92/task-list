@@ -1,4 +1,4 @@
-import { CreateLoginError, UpdateLoginError, ValidLoginError } from '@core/repositories/error/login-error'
+import { CreateLoginError, DeleteLoginError, UpdateLoginError, ValidLoginError } from '@core/repositories/error/login-error'
 import { LoginModel } from '@app/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
@@ -44,6 +44,20 @@ export class LoginRepositoryMemory implements LoginRepository {
       return right(true)
     } catch (error: any) {
       return left(new UpdateLoginError(error?.stack))
+    }
+  }
+
+  async del (id: string): Promise<Either<DeleteLoginError, boolean>> {
+    try {
+      const index = loginMemory.findIndex(item => item.id === id)
+
+      if (index < 0) right(false)
+
+      loginMemory.splice(index, 1)
+
+      return right(true)
+    } catch (error: any) {
+      return left(new DeleteLoginError(error?.stack))
     }
   }
 }

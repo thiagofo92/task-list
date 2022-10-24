@@ -6,8 +6,8 @@ describe('#Login create', () => {
   test('Create login with success', async () => {
     const usecase = factoryCreateUseCaseFake()
 
-    usecase.execute(loginEntityMock)
-    expect(true).toStrictEqual(true)
+    const result = await usecase.execute(loginEntityMock)
+    expect(result).toStrictEqual(loginEntityMock)
   })
   test.todo('Generate login error when try to create login')
 })
