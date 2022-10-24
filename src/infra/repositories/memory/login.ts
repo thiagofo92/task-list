@@ -1,4 +1,4 @@
-import { CreateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
+import { CreateLoginError, UpdateLoginError, ValidLoginError } from '@core/repositories/error/login-error'
 import { LoginModel } from 'app/models/login'
 import { LoginEntity } from 'core/entities/LoginEntity'
 import { LoginRepository } from 'core/repositories/login'
@@ -23,11 +23,15 @@ export class LoginRepositoryMemory implements LoginRepository {
     }
   }
 
-  async valid (login: LoginEntity): Promise<boolean> {
-    if (!loginMemory.find(item => login.email === item.email)) return false
-    if (!loginMemory.find(item => login.password === item.password)) return false
+  async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
+    try {
+      if (!loginMemory.find(item => login.email === item.email)) return right(false)
+      if (!loginMemory.find(item => login.password === item.password)) return right(false)
 
-    return true
+      return right(true)
+    } catch (error: any) {
+      return left(new ValidLoginError(error?.stacK))
+    }
   }
 
   async update (login: LoginEntity): Promise<Either<UpdateLoginError, boolean>> {
