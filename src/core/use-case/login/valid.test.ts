@@ -1,13 +1,8 @@
-import { randomUUID } from 'crypto'
 import { beforeEach, describe, expect, test } from 'vitest'
-import { LoginModel } from '@app/models/login'
 import { factoryValidUseCase } from './factory-fake/valid-use-case'
+import { loginEntityMock } from './mock/login-entity'
 
-const loginFake: LoginModel = {
-  id: randomUUID(),
-  email: 'test@test.com.br',
-  password: '1234'
-}
+const loginFake = { ...loginEntityMock }
 
 describe('#Login - Valid', () => {
   beforeEach(() => {

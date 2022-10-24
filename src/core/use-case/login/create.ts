@@ -3,8 +3,12 @@ import { LoginRepository } from '../../repositories/login'
 
 export class CreateLoginUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}
-  async execute (login: LoginEntity): Promise<any> {
+  async execute (login: LoginEntity): Promise<LoginEntity | null> {
     const result = await this.loginRepository.create(login)
-    return result
+    if (result.isLeft()) {
+      console.log(result.value)
+      return null
+    }
+    return result.value
   }
 }
