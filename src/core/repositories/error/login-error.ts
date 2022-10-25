@@ -12,6 +12,20 @@ export class UpdateLoginError extends Error {
   }
 }
 
+export class NotFoundEmailError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'NotFoundEmailError'
+  }
+}
+
+export class NotFoundPasswordError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'NotFoundPasswordError'
+  }
+}
+
 export class ValidLoginError extends Error {
   constructor (message: string) {
     super(message)

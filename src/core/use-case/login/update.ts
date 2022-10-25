@@ -7,10 +7,7 @@ export class UpdateLoginUseCase {
   async execute (login: LoginEntity): Promise<boolean> {
     const result = await this.loginRepository.update(login)
 
-    if (result.isLeft()) {
-      console.log(result.value)
-      return false
-    }
+    if (result.isLeft()) throw result.value
 
     return result.value
   }

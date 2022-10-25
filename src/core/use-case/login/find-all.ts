@@ -6,11 +6,8 @@ export class FindAllUseCase {
 
   async execute (): Promise<LoginEntity[]> {
     const result = await this.loginRepository.findAll()
-    if (result.isLeft()) {
-      console.log(result.value)
+    if (result.isLeft()) throw result.value
 
-      return []
-    }
     return result.value
   }
 }

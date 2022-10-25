@@ -7,11 +7,8 @@ export class FindByIdUseCase {
   async execute (id: string): Promise<LoginEntity | null> {
     const result = await this.loginRepository.findById(id)
 
-    if (result.isLeft()) {
-      console.log(result.value)
+    if (result.isLeft()) throw result.value
 
-      return null
-    }
     return result.value
   }
 }

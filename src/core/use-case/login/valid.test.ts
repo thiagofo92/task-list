@@ -11,15 +11,31 @@ describe('#Login - Valid', () => {
   })
 
   test('Success to valid login', async () => {
-    const validLogin = factoryValidUseCase()
+    const validLogin = factoryValidUseCase([loginEntityMock])
     const isValid = await validLogin.execute(loginFake)
 
     expect(isValid).toStrictEqual(true)
   })
 
-  test.skip('Invalid login', async () => {
-    const validLogin = factoryValidUseCase()
+  test('Invalid login with password', async () => {
+    const validLogin = factoryValidUseCase([loginEntityMock])
     loginFake.password = '123'
+    const isValid = await validLogin.execute(loginFake)
+
+    expect(isValid).toStrictEqual(false)
+  })
+
+  test('Invalid login with email', async () => {
+    const validLogin = factoryValidUseCase([loginEntityMock])
+    loginFake.email = ''
+    const isValid = await validLogin.execute(loginFake)
+
+    expect(isValid).toStrictEqual(false)
+  })
+
+  test('Error to valid login', async () => {
+    const validLogin = factoryValidUseCase(null as any)
+    loginFake.email = ''
     const isValid = await validLogin.execute(loginFake)
 
     expect(isValid).toStrictEqual(false)

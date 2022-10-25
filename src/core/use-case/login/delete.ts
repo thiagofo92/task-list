@@ -6,10 +6,7 @@ export class DeleteLoginUseCase {
   async execute (id: string): Promise<boolean> {
     const result = await this.loginRepository.del(id)
 
-    if (result.isLeft()) {
-      console.log(result.value)
-      return false
-    }
+    if (result.isLeft()) throw result.value
 
     return result.value
   }
