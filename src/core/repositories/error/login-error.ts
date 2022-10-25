@@ -12,6 +12,13 @@ export class UpdateLoginError extends Error {
   }
 }
 
+export class NotFoundIdUpdateLoginError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'NotFoundIdUpdateLoginError'
+  }
+}
+
 export class NotFoundEmailError extends Error {
   constructor (message: string) {
     super(message)

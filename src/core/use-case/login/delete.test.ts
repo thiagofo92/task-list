@@ -1,4 +1,5 @@
 import { describe, test, expect } from 'vitest'
+import { DeleteLoginError } from '@core/repositories/error/login-error'
 import { factoryDeleteUseCaseFake } from './factory-fake/delete'
 import { loginEntityMock } from './mock/login-entity'
 
@@ -12,8 +13,8 @@ describe('# Login - Delete', () => {
 
   test('Error to delete the user', async () => {
     const usecase = factoryDeleteUseCaseFake(null as any)
-    const result = await usecase.execute(loginEntityMock.id)
+    const result = usecase.execute(loginEntityMock.id)
 
-    expect(result).toStrictEqual(false)
+    await expect(result).rejects.toThrowError(DeleteLoginError)
   })
 })

@@ -6,7 +6,8 @@ import {
   UpdateLoginError,
   ValidLoginError,
   NotFoundEmailError,
-  NotFoundPasswordError
+  NotFoundPasswordError,
+  NotFoundIdUpdateLoginError
 } from '@core/repositories/error/login-error'
 import { LoginModel } from '@app/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
@@ -26,10 +27,10 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
     try {
-      if (!this.loginEntityMock.find(item => login.email === item.email)) left(new NotFoundEmailError('EmailNotFound'))
+      if (!this.loginEntityMock.find(item => login.email === item.email)) return left(new NotFoundEmailError('EmailNotFound'))
 
       if (!this.loginEntityMock.find(item => login.password === item.password)) {
-        left(new NotFoundPasswordError('PasswordNotFound'))
+        return left(new NotFoundPasswordError('PasswordNotFound'))
       }
 
       return right(true)
@@ -41,7 +42,7 @@ export class LoginRepositoryMemory implements LoginRepository {
   async update (login: LoginEntity): Promise<Either<UpdateLoginError, boolean>> {
     try {
       const index = this.loginEntityMock.findIndex(item => item.id === login.id)
-      if (index < 0) return right(false)
+      if (index < 0) return left(new NotFoundIdUpdateLoginError('IdNotFound'))
 
       this.loginEntityMock[index].password = login.password
 

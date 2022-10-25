@@ -1,3 +1,4 @@
+import { NotFoundIdUpdateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
 import { describe, test, expect, beforeEach } from 'vitest'
 import { factoryUpdateUseCaseFake } from './factory-fake/update'
 import { loginEntityMock } from './mock/login-entity'
@@ -19,16 +20,16 @@ describe('# Login - Update', () => {
 
   test('Error to upate password', async () => {
     const usecase = factoryUpdateUseCaseFake(null as any)
-    const result = await usecase.execute(loginEntityMock)
+    const result = usecase.execute(loginEntityMock)
 
-    expect(result).toStrictEqual(false)
+    await expect(result).rejects.toThrowError(UpdateLoginError)
   })
 
   test('Error to find id', async () => {
     loginMock.id = ''
     const usecase = factoryUpdateUseCaseFake([loginMock])
-    const result = await usecase.execute(loginEntityMock)
+    const result = usecase.execute(loginEntityMock)
 
-    expect(result).toStrictEqual(false)
+    await expect(result).rejects.toThrowError(NotFoundIdUpdateLoginError)
   })
 })
