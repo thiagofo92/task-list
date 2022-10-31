@@ -1,7 +1,7 @@
 import { CreateLoginError } from '@core/repositories/error/login-error'
 import { describe, expect, test } from 'vitest'
 import { factoryCreateUseCaseFake } from './factory-fake/create'
-import { loginEntityMock } from './mock/login-entity'
+import { loginEntityMock } from './mock/login-entity-mock'
 
 describe('#Login create', () => {
   test('Create login with success', async () => {

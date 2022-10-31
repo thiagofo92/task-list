@@ -1,15 +1,17 @@
 import { ListModel } from '@app/models/list'
+import { ListEntity } from '@core/entities'
 import { ListCreateError } from '@core/repositories/error/list-error'
 import { ListRepository } from '@core/repositories/list'
 import { Either, left, right } from '@shared/errors/Either'
 
 export class ListRepositoryMemory implements ListRepository {
-  constructor () {}
+  constructor (private readonly listEntity: ListEntity[]) {}
 
-  async create (): Promise<Either<ListCreateError, ListModel>> {
+  async create (listEntity: ListEntity): Promise<Either<ListCreateError, ListModel>> {
     try {
-      const result: ListModel = { id: 0, type: '' }
-      return right(result)
+      this.listEntity.push(listEntity)
+      const list = this.listEntity[this.listEntity.length - 1]
+      return right(list as any)
     } catch (error: any) {
       return left(new ListCreateError(error.message))
     }
