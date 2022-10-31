@@ -1,7 +1,7 @@
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 
-export class UpdateLoginUseCase {
+export class LoginUpdateUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}
 
   async execute (login: LoginEntity): Promise<boolean> {

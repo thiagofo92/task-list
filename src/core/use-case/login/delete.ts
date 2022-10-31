@@ -1,6 +1,6 @@
 import { LoginRepository } from '@core/repositories/login'
 
-export class DeleteLoginUseCase {
+export class LoginDeleteUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}
 
   async execute (id: string): Promise<boolean> {

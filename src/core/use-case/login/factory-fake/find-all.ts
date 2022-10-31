@@ -1,8 +1,8 @@
-import { FindAllUseCase } from '../find-all'
+import { LoginFindAllUseCase } from '../find-all'
 import { LoginRepositoryMemory } from '@infra/repositories/memory'
 import { LoginEntity } from '@core/entities/LoginEntity'
 
-export function factoryFindAllUseCaseFake (login: LoginEntity[]): FindAllUseCase {
+export function factoryFindAllUseCaseFake (login: LoginEntity[]): LoginFindAllUseCase {
   const repository = new LoginRepositoryMemory(login)
-  return new FindAllUseCase(repository)
+  return new LoginFindAllUseCase(repository)
 }

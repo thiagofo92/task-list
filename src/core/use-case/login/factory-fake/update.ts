@@ -1,8 +1,8 @@
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepositoryMemory } from '@infra/repositories/memory'
-import { UpdateLoginUseCase } from '../update'
+import { LoginUpdateUseCase } from '../update'
 
-export function factoryUpdateUseCaseFake (login: LoginEntity[]): UpdateLoginUseCase {
+export function factoryUpdateUseCaseFake (login: LoginEntity[]): LoginUpdateUseCase {
   const repository = new LoginRepositoryMemory(login)
-  return new UpdateLoginUseCase(repository)
+  return new LoginUpdateUseCase(repository)
 }

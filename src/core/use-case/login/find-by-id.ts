@@ -1,7 +1,7 @@
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 
-export class FindByIdUseCase {
+export class LoginFindByIdUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}
 
   async execute (id: string): Promise<LoginEntity | null> {

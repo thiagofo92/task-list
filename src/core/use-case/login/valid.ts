@@ -1,7 +1,7 @@
 import { LoginRepository } from 'core/repositories/login'
 import { LoginEntity } from '../../entities/LoginEntity'
 
-export class ValidLoginUseCase {
+export class LoginValidUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}
 
   async execute (login: LoginEntity): Promise<boolean> {
