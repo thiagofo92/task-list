@@ -1,3 +1,5 @@
-export function CreateListUseCase (): CreateListUseCase {
-  return new CreateListUseCase()
+import { ListCreateUseCase } from '../create'
+
+export function ListCreateFactory (): ListCreateUseCase {
+  return new ListCreateUseCase()
 }
