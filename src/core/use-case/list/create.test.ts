@@ -1,6 +1,5 @@
 import { describe, test, expect } from 'vitest'
 import { ListModel } from '@app/models/list'
-import { ListCreateUseCase } from './create'
 import { factoryListCreate } from './factory/create'
 
 describe('# List - create', () => {

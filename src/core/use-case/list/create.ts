@@ -6,6 +6,8 @@ export class ListCreateUseCase {
 
   async execute (): Promise<ListModel> {
     const result = await this.listRepository.create()
-    return result
+    if (result.isLeft()) throw result.value
+
+    return result.value
   }
 }
