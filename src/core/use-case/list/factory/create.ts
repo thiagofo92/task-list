@@ -1,5 +1,6 @@
 import { ListCreateUseCase } from '../create'
 
-export function ListCreateFactory (): ListCreateUseCase {
-  return new ListCreateUseCase()
+export function factoryListCreate (): ListCreateUseCase {
+  const repository = new ListRepositoryMemory()
+  return new ListCreateUseCase(repository)
 }

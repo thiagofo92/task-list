@@ -1,11 +1,11 @@
 import { ListModel } from '@app/models/list'
+import { ListRepository } from '@core/repositories/list'
 
 export class ListCreateUseCase {
-  constructor () {}
+  constructor (private readonly listRepository: ListRepository) {}
 
   async execute (): Promise<ListModel> {
-    const t: ListModel = { } as any
-
-    return t
+    const result = await this.listRepository.create()
+    return result
   }
 }
