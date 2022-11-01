@@ -1,9 +1,9 @@
 import { NotFoundEmailError, NotFoundPasswordError, ValidLoginError } from '@core/repositories/error/login-error'
 import { beforeEach, describe, expect, test } from 'vitest'
 import { factoryValidUseCase } from './factory-fake/valid-use-case'
-import { loginEntityMock } from '@infra/repositories/memory/mock/login-entity-mock'
+import { loginMock } from '@infra/repositories/memory/mock/login-entity-mock'
 
-const loginFake = { ...loginEntityMock }
+const loginFake = { ...loginMock }
 
 describe('#Login - Valid', () => {
   beforeEach(() => {
@@ -12,14 +12,14 @@ describe('#Login - Valid', () => {
   })
 
   test('Success to valid login', async () => {
-    const validLogin = factoryValidUseCase([loginEntityMock])
+    const validLogin = factoryValidUseCase([loginMock])
     const isValid = await validLogin.execute(loginFake)
 
     expect(isValid).toStrictEqual(true)
   })
 
   test('Invalid login with password', async () => {
-    const validLogin = factoryValidUseCase([loginEntityMock])
+    const validLogin = factoryValidUseCase([loginMock])
     loginFake.password = '123'
     const isValid = validLogin.execute(loginFake)
 
@@ -27,7 +27,7 @@ describe('#Login - Valid', () => {
   })
 
   test('Invalid login with email', async () => {
-    const validLogin = factoryValidUseCase([loginEntityMock])
+    const validLogin = factoryValidUseCase([loginMock])
     loginFake.email = ''
     const isValid = validLogin.execute(loginFake)
 

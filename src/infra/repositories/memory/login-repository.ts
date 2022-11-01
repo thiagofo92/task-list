@@ -13,12 +13,14 @@ import { LoginModel } from '@app/gateway/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 import { Either, left, right } from '@shared/errors/Either'
+import { loginMock } from './mock/login-entity-mock'
+
+const LoginMock = [loginMock]
 export class LoginRepositoryMemory implements LoginRepository {
-  constructor (private readonly loginEntityMock: LoginModel[]) {}
   async create (login: LoginEntity): Promise<Either<CreateLoginError, LoginModel>> {
     try {
-      this.loginEntityMock.push(login)
-      const newLogin = this.loginEntityMock[this.loginEntityMock.length - 1]
+      LoginMock.push(login)
+      const newLogin = LoginMock[LoginMock.length - 1]
       return right(newLogin)
     } catch (error: any) {
       return left(new CreateLoginError(error?.stack))
@@ -27,9 +29,9 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
     try {
-      if (!this.loginEntityMock.find(item => login.email === item.email)) return left(new NotFoundEmailError('EmailNotFound'))
+      if (!LoginMock.find(item => login.email === item.email)) return left(new NotFoundEmailError('EmailNotFound'))
 
-      if (!this.loginEntityMock.find(item => login.password === item.password)) {
+      if (!LoginMock.find(item => login.password === item.password)) {
         return left(new NotFoundPasswordError('PasswordNotFound'))
       }
 
@@ -41,10 +43,10 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async update (login: LoginEntity): Promise<Either<UpdateLoginError, boolean>> {
     try {
-      const index = this.loginEntityMock.findIndex(item => item.id === login.id)
+      const index = LoginMock.findIndex(item => item.id === login.id)
       if (index < 0) return left(new NotFoundIdUpdateLoginError('IdNotFound'))
 
-      this.loginEntityMock[index].password = login.password
+      LoginMock[index].password = login.password
 
       return right(true)
     } catch (error: any) {
@@ -54,11 +56,11 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async del (id: string): Promise<Either<DeleteLoginError, boolean>> {
     try {
-      const index = this.loginEntityMock.findIndex(item => item.id === id)
+      const index = LoginMock.findIndex(item => item.id === id)
 
       if (index < 0) right(false)
 
-      this.loginEntityMock.splice(index, 1)
+      LoginMock.splice(index, 1)
 
       return right(true)
     } catch (error: any) {
@@ -68,7 +70,7 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async findAll (): Promise<Either<FindAllLoginError, LoginModel[]>> {
     try {
-      return right(this.loginEntityMock)
+      return right(LoginMock)
     } catch (error: any) {
       return left(new FindAllLoginError(error?.stack))
     }
@@ -76,7 +78,7 @@ export class LoginRepositoryMemory implements LoginRepository {
 
   async findById (id: string): Promise<Either<FindByIdLoginError, LoginModel | null>> {
     try {
-      const result = this.loginEntityMock.find(item => item.id === id) || null
+      const result = LoginMock.find(item => item.id === id) || null
       return right(result)
     } catch (error: any) {
       return left(new FindByIdLoginError(error?.stack))

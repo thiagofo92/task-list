@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 
 export class LoginEntity {
-  id?: string
+  id: string
   email: string
   password: string
 
