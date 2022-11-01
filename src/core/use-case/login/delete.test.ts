@@ -1,7 +1,7 @@
 import { describe, test, expect } from 'vitest'
 import { DeleteLoginError } from '@core/repositories/error/login-error'
 import { factoryDeleteUseCaseFake } from './factory-fake/delete'
-import { loginEntityMock } from './mock/login-entity-mock'
+import { loginEntityMock } from '@infra/repositories/memory/mock/login-entity-mock'
 
 describe('# Login - Delete', () => {
   test('Success to delete the user', async () => {

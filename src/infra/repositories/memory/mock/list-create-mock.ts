@@ -1,5 +1,6 @@
 import { ListCreateModel } from '@app/gateway/models/list-model'
-import { loginEntityMock } from '@core/use-case/login/mock/login-entity-mock'
+import { ListTypeModel } from '@core/models'
+import { loginEntityMock } from '@infra/repositories/memory/mock/login-entity-mock'
 
 export const listCreateMock: ListCreateModel = {
   idLogin: loginEntityMock.id,
@@ -7,7 +8,7 @@ export const listCreateMock: ListCreateModel = {
   description: 'Mock list entity'
 }
 
-export const listTypeEntityMock = [
+export const listTypeMock: ListTypeModel[] = [
   {
     id: 1,
     type: 'food'

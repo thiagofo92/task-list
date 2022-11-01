@@ -1,7 +1,7 @@
 import { NotFoundEmailError, NotFoundPasswordError, ValidLoginError } from '@core/repositories/error/login-error'
 import { beforeEach, describe, expect, test } from 'vitest'
 import { factoryValidUseCase } from './factory-fake/valid-use-case'
-import { loginEntityMock } from './mock/login-entity-mock'
+import { loginEntityMock } from '@infra/repositories/memory/mock/login-entity-mock'
 
 const loginFake = { ...loginEntityMock }
 

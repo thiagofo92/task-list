@@ -1,5 +1,5 @@
 import { ListEntity } from '@core/entities'
-import { ListCreateError } from '@core/repositories/error/list-error'
+import { ListCreateError, ListFindByIdError } from '@core/repositories/error/list-error'
 import { ListRepository } from '@core/repositories/list-repository'
 import { Either, left, right } from '@shared/errors/Either'
 
@@ -19,5 +19,18 @@ export class ListRepositoryMemory implements ListRepository {
 
   async update (): Promise<any> {
 
+  }
+
+  async findById (id: number): Promise<Either<ListFindByIdError, any>> {
+    try {
+      const list = this.listEntity.find(item => item.id === id)
+
+
+      const listType = this.
+
+      return right(list)
+    } catch (error: any) {
+      return left(new ListFindByIdError(error.message))
+    }
   }
 }

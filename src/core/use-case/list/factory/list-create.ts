@@ -1,7 +1,7 @@
 import { ListCreateGateway } from '@app/gateway/list-gateway'
 import { ListRepositoryMemory } from '@infra/repositories/memory/list-repository'
 import { ListCreateUseCase } from '../list-create'
-import { listCreateMock } from '../mock/list-create-mock'
+import { listCreateMock } from '@infra/repositories/memory/mock/list-create-mock'
 
 export function factoryListCreate (): ListCreateUseCase {
   const repository = new ListRepositoryMemory([listCreateMock])
