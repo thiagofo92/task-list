@@ -11,7 +11,6 @@ export class ListCreateUseCase {
   async execute (listModel: ListCreateModel): Promise<ListCreateModel> {
     const list = this.listCreateGateway.toDto(listModel)
     const listCreated = await this.listRepository.create(list.listEntity, list.idListType)
-
     if (listCreated.isLeft()) throw listCreated.value
 
     return listCreated.value

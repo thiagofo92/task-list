@@ -1,8 +1,8 @@
 import { ListRepositoryMemory } from '@infra/repositories/memory/list-repository'
 import { ListCreateUseCase } from '../list-create'
-import { listEntityMock } from '../mock/list-entity-mock'
+import { listCreateMock } from '../mock/list-create-mock'
 
 export function factoryListCreate (): ListCreateUseCase {
-  const repository = new ListRepositoryMemory([listEntityMock])
+  const repository = new ListRepositoryMemory([listCreateMock])
   return new ListCreateUseCase(repository)
 }
