@@ -1,4 +1,4 @@
-import { ListCreateGatewayModel, ListCreateModel } from '@app/models/list-model'
+import { ListCreateGatewayModel, ListCreateModel } from '@app/gateway/models/list-model'
 import { ListCreateGatewayPort } from './port/list-gateway-port'
 
 export class ListCreateGateway implements ListCreateGatewayPort {

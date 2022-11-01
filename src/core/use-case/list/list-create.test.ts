@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { ListCreateModel } from '@app/models/list-model'
+import { ListCreateModel } from '@app/gateway/models/list-model'
 import { factoryListCreate } from './factory/list-create'
 import { listCreateMock } from './mock/list-create-mock'
 

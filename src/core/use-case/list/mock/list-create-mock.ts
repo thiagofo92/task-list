@@ -1,4 +1,4 @@
-import { ListCreateModel } from '@app/models/list-model'
+import { ListCreateModel } from '@app/gateway/models/list-model'
 import { loginEntityMock } from '@core/use-case/login/mock/login-entity-mock'
 
 export const listCreateMock: ListCreateModel = {

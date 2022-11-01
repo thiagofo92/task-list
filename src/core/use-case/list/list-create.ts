@@ -1,6 +1,6 @@
 import { ListCreateGateway } from '@app/gateway/list-gateway'
-import { ListCreateModel } from '@app/models/list-model'
-import { ListRepository } from '@core/repositories/list'
+import { ListCreateModel } from '@app/gateway/models/list-model'
+import { ListRepository } from '@core/repositories/list-repository'
 
 export class ListCreateUseCase {
   constructor (

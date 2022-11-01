@@ -4,7 +4,7 @@ export interface ListEntity {
   description: string
 }
 
-export interface ListType {
+export interface ListTypeEntity {
   id: number
   type: string
 }
@@ -14,14 +14,14 @@ export interface ListTypeAuxEntity {
   idListType: number
 }
 
-export interface ListItems {
+export interface ListItemsEntity {
   id: number
   idList: number
   description: string
   text: string
 }
 
-export interface ListItemsPhoto {
+export interface ListItemsPhotoEntity {
   id: number
   idListItems: number
   photo: string

@@ -1,6 +1,6 @@
 import { ListEntity } from '@core/entities'
 import { ListCreateError } from '@core/repositories/error/list-error'
-import { ListRepository } from '@core/repositories/list'
+import { ListRepository } from '@core/repositories/list-repository'
 import { Either, left, right } from '@shared/errors/Either'
 
 export class ListRepositoryMemory implements ListRepository {
