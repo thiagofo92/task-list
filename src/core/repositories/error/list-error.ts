@@ -11,3 +11,10 @@ export class ListUpdateError extends Error {
     this.name = 'ListUpdateError'
   }
 }
+
+export class ListFindByIdError extends Error {
+  constructor (message?: string) {
+    super(message)
+    this.name = 'ListFindByIdError'
+  }
+}

@@ -72,6 +72,7 @@
         "code": 130
       }
     ],
-    "@typescript-eslint/prefer-nullish-coalescing": "off"
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/no-non-null-assertion": "warn"
   }
 }
