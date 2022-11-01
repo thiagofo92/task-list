@@ -1,6 +1,5 @@
-import { ListModel } from '@app/models/list'
-import { ListEntity } from '@core/entities'
+import { ListCreateGatewayModel, ListCreateModel } from '@app/models/list-model'
 
 export interface ListCreateGatewayPort {
-  toDto: (List: ListModel, type: string[]) => ListEntity
+  toDto: (List: ListCreateModel) => ListCreateGatewayModel
 }

@@ -145,7 +145,7 @@
           "active": false,
           "left": 46.6669,
           "top": 18.3334,
-          "zIndex": 4,
+          "zIndex": 3,
           "widthName": 60,
           "widthComment": 60
         },
@@ -201,13 +201,36 @@
               "widthDefault": 60
             },
             "id": "43dceae3-4451-4a96-b6e6-5531d3bc3268"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "VARCHAR(20)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 87.71875,
+              "widthDefault": 60
+            },
+            "id": "34ea18b6-c2f9-4167-90e7-937d5645a9e6"
           }
         ],
         "ui": {
           "active": true,
           "left": 42.6174,
           "top": 276.7367,
-          "zIndex": 16,
+          "zIndex": 17,
           "widthName": 60,
           "widthComment": 60
         },
@@ -292,7 +315,7 @@
           "active": false,
           "left": 73.6594,
           "top": 525.4383,
-          "zIndex": 6,
+          "zIndex": 5,
           "widthName": 60,
           "widthComment": 60
         },
@@ -547,7 +570,7 @@
           "active": false,
           "left": 636.179,
           "top": 321.4572,
-          "zIndex": 11,
+          "zIndex": 8,
           "widthName": 77.8798828125,
           "widthComment": 60
         },
@@ -609,7 +632,7 @@
           "active": false,
           "left": 1059.3751,
           "top": 331.3644,
-          "zIndex": 12,
+          "zIndex": 9,
           "widthName": 60,
           "widthComment": 60
         },
@@ -694,7 +717,7 @@
           "active": false,
           "left": 443.1962,
           "top": 535.5108,
-          "zIndex": 5,
+          "zIndex": 4,
           "widthName": 61.9599609375,
           "widthComment": 60
         },
@@ -802,7 +825,7 @@
           "active": false,
           "left": 841.041,
           "top": 517.4992,
-          "zIndex": 10,
+          "zIndex": 7,
           "widthName": 60,
           "widthComment": 60
         },
@@ -887,7 +910,7 @@
           "active": false,
           "left": 1293.1234,
           "top": 528.1252,
-          "zIndex": 8,
+          "zIndex": 6,
           "widthName": 95.93896484375,
           "widthComment": 60
         },
@@ -920,7 +943,7 @@
           "columnIds": [
             "43dceae3-4451-4a96-b6e6-5531d3bc3268"
           ],
-          "x": 229.976775,
+          "x": 232.41036875,
           "y": 276.7367,
           "direction": "top"
         },
@@ -937,8 +960,8 @@
           "columnIds": [
             "34067ca4-8703-4118-b50d-60d4dff92a78"
           ],
-          "x": 229.976775,
-          "y": 386.7367,
+          "x": 232.41036875,
+          "y": 407.2367,
           "direction": "bottom"
         },
         "end": {
@@ -963,8 +986,8 @@
           "columnIds": [
             "34067ca4-8703-4118-b50d-60d4dff92a78"
           ],
-          "x": 417.33615,
-          "y": 317.9867,
+          "x": 422.2033375,
+          "y": 325.6742,
           "direction": "right"
         },
         "end": {
@@ -1015,8 +1038,8 @@
           "columnIds": [
             "34067ca4-8703-4118-b50d-60d4dff92a78"
           ],
-          "x": 417.33615,
-          "y": 345.4867,
+          "x": 422.2033375,
+          "y": 358.2992,
           "direction": "right"
         },
         "end": {
@@ -1067,8 +1090,8 @@
           "columnIds": [
             "34067ca4-8703-4118-b50d-60d4dff92a78"
           ],
-          "x": 417.33615,
-          "y": 290.4867,
+          "x": 422.2033375,
+          "y": 293.0492,
           "direction": "right"
         },
         "end": {
@@ -1145,8 +1168,8 @@
           "columnIds": [
             "34067ca4-8703-4118-b50d-60d4dff92a78"
           ],
-          "x": 417.33615,
-          "y": 372.9867,
+          "x": 422.2033375,
+          "y": 390.9242,
           "direction": "right"
         },
         "end": {

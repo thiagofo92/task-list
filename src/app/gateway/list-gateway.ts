@@ -1,8 +1,14 @@
-import { ListModel } from '@app/models/list'
-import { ListEntity } from '@core/entities'
+import { ListCreateGatewayModel, ListCreateModel } from '@app/models/list-model'
 import { ListCreateGatewayPort } from './port/list-gateway-port'
-export class ListGateway implements ListCreateGatewayPort {
-  toDto (List: ListModel, type: string[]): ListEntity {
 
+export class ListCreateGateway implements ListCreateGatewayPort {
+  toDto (list: ListCreateModel): ListCreateGatewayModel {
+    return {
+      listEntity: {
+        idLogin: list.idLogin,
+        description: list.description
+      },
+      idListType: list.type
+    }
   }
 }

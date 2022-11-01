@@ -1,7 +1,7 @@
 export interface ListEntity {
-  id: number
+  id?: number
   idLogin: string
-  idListTypeAux: number
+  description: string
 }
 
 export interface ListType {

@@ -1,16 +1,19 @@
-import { ListModel } from '@app/models/list'
+import { ListCreateGateway } from '@app/gateway/list-gateway'
+import { ListCreateModel } from '@app/models/list-model'
 import { ListRepository } from '@core/repositories/list'
 
 export class ListCreateUseCase {
   constructor (
-    private readonly listRepository: ListRepository
+    private readonly listRepository: ListRepository,
+    private readonly listCreateGateway: ListCreateGateway
   ) {}
 
-  async execute (listModel: ListModel): Promise<ListModel> {
-    const list = {} as any
-    const result = await this.listRepository.create(list)
-    if (result.isLeft()) throw result.value
+  async execute (listModel: ListCreateModel): Promise<ListCreateModel> {
+    const list = this.listCreateGateway.toDto(listModel)
+    const listCreated = await this.listRepository.create(list.listEntity, list.idListType)
 
-    return result.value
+    if (listCreated.isLeft()) throw listCreated.value
+
+    return listCreated.value
   }
 }
