@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
 import { ListModel } from '@app/models/list'
-import { factoryListCreate } from './factory/create'
+import { factoryListCreate } from './factory/list-create'
 
 describe('# List - create', () => {
   test('Success to create the list', async () => {

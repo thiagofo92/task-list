@@ -17,5 +17,7 @@ export class ListRepositoryMemory implements ListRepository {
     }
   }
 
-  update: () => Promise<any>
+  async update (): Promise<any> {
+
+  }
 }

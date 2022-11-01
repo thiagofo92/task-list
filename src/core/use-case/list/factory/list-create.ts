@@ -1,5 +1,5 @@
 import { ListRepositoryMemory } from '@infra/repositories/memory/list-repository'
-import { ListCreateUseCase } from '../create'
+import { ListCreateUseCase } from '../list-create'
 import { listEntityMock } from '../mock/list-entity-mock'
 
 export function factoryListCreate (): ListCreateUseCase {
