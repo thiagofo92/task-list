@@ -18,3 +18,10 @@ export class ListFindByIdError extends Error {
     this.name = 'ListFindByIdError'
   }
 }
+
+export class ListFindAllTypeByIdError extends Error {
+  constructor (message?: string) {
+    super(message)
+    this.name = 'ListFindAllTypeByIdError'
+  }
+}

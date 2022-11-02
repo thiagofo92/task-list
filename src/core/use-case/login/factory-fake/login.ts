@@ -1,8 +1,7 @@
 import { LoginCreateUseCase } from '../create'
 import { LoginRepositoryMemory } from 'infra/repositories/memory'
-import { LoginEntity } from '@core/entities/LoginEntity'
 
-export function factoryLoginUseCaseFake (login: LoginEntity[]): LoginCreateUseCase {
-  const repository = new LoginRepositoryMemory(login)
+export function factoryLoginUseCaseFake (): LoginCreateUseCase {
+  const repository = new LoginRepositoryMemory()
   return new LoginCreateUseCase(repository)
 }

@@ -13,7 +13,7 @@ import { LoginModel } from '@app/gateway/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 import { Either, left, right } from '@shared/errors/Either'
-import { loginMock } from './mock/login-entity-mock'
+import { loginMock } from './mock/login-mock'
 
 const LoginMock = [loginMock]
 export class LoginRepositoryMemory implements LoginRepository {
