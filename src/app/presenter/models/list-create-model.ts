@@ -1,4 +1,4 @@
-import { ListTypeModel } from '@core/models'
+import { ListTypeModel } from '@app/models'
 
 export interface ListCreateModelPresenter {
   id: number

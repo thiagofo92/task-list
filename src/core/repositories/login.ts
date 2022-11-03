@@ -1,4 +1,4 @@
-import { LoginModel } from '@app/gateway/models/login'
+import { LoginModel } from '@app/models/login'
 import { LoginEntity } from 'core/entities/LoginEntity'
 import { Either } from 'shared/errors/Either'
 import {

@@ -9,7 +9,7 @@ import {
   NotFoundPasswordError,
   NotFoundIdUpdateLoginError
 } from '@core/repositories/error/login-error'
-import { LoginModel } from '@app/gateway/models/login'
+import { LoginModel } from '@app/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 import { Either, left, right } from '@shared/errors/Either'
