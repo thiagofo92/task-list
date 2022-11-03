@@ -36,8 +36,7 @@ describe('#Login - Valid', () => {
 
   test('Error to valid login', async () => {
     const validLogin = factoryValidUseCase()
-    loginFake.email = ''
-    const isValid = validLogin.execute(loginFake)
+    const isValid = validLogin.execute(null as any)
 
     await expect(isValid).rejects.toThrowError(ValidLoginError)
   })

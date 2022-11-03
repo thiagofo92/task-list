@@ -15,7 +15,7 @@ import { LoginRepository } from '@core/repositories/login'
 import { Either, left, right } from '@shared/errors/Either'
 import { loginMock } from './mock/login-mock'
 
-const LoginMock = [loginMock]
+const LoginMock = [{ ...loginMock }]
 export class LoginRepositoryMemory implements LoginRepository {
   async create (login: LoginEntity): Promise<Either<CreateLoginError, LoginModel>> {
     try {
@@ -27,7 +27,7 @@ export class LoginRepositoryMemory implements LoginRepository {
     }
   }
 
-  async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
+  async valid (login: LoginEntity): Promise<Either<ValidLoginError | NotFoundEmailError | NotFoundPasswordError, boolean>> {
     try {
       if (!LoginMock.find(item => login.email === item.email)) return left(new NotFoundEmailError('EmailNotFound'))
 
@@ -58,7 +58,7 @@ export class LoginRepositoryMemory implements LoginRepository {
     try {
       const index = LoginMock.findIndex(item => item.id === id)
 
-      if (index < 0) right(false)
+      if (index < 0) return right(false)
 
       LoginMock.splice(index, 1)
 

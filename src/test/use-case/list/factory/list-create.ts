@@ -1,6 +1,6 @@
 import { ListCreateGateway } from '@app/gateway/list-gateway'
 import { ListRepositoryMemory } from '@infra/repositories/memory/list-repository'
-import { ListCreateUseCase } from '../list-create'
+import { ListCreateUseCase } from '../../../../core/use-case/list/list-create'
 import { ListCreatePresenter } from '@app/presenter'
 
 export function factoryListCreate (): ListCreateUseCase {

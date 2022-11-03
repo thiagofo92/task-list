@@ -11,6 +11,13 @@ describe('# Login - Delete', () => {
     expect(result).toStrictEqual(true)
   })
 
+  test('User not found', async () => {
+    const usecase = factoryDeleteUseCaseFake()
+    const result = await usecase.execute('')
+
+    expect(result).toStrictEqual(false)
+  })
+
   test('Error to delete the user', async () => {
     const usecase = factoryDeleteUseCaseFake()
     const result = usecase.execute(loginMock.id)

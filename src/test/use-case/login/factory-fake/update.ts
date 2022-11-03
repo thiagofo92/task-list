@@ -1,5 +1,5 @@
 import { LoginRepositoryMemory } from '@infra/repositories/memory'
-import { LoginUpdateUseCase } from '../update'
+import { LoginUpdateUseCase } from '../../../../core/use-case/login/update'
 
 export function factoryUpdateUseCaseFake (): LoginUpdateUseCase {
   const repository = new LoginRepositoryMemory()
