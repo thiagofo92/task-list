@@ -1,4 +1,4 @@
-import { LoginCreateUseCase } from '../../../../core/use-case/login/create'
+import { LoginCreateUseCase } from '../../../../app/use-case/login/create'
 import { LoginRepositoryMemory } from 'infra/repositories/memory'
 
 export function factoryLoginUseCaseFake (): LoginCreateUseCase {

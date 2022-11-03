@@ -1,5 +1,5 @@
 import { LoginEntity } from 'core/entities/LoginEntity'
-import { LoginRepository } from '../../repositories/login'
+import { LoginRepository } from '../../../core/repositories/login'
 
 export class LoginCreateUseCase {
   constructor (private readonly loginRepository: LoginRepository) {}

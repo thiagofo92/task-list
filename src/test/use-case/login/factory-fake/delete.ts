@@ -1,4 +1,4 @@
-import { LoginDeleteUseCase } from '../../../../core/use-case/login/delete'
+import { LoginDeleteUseCase } from '../../../../app/use-case/login/delete'
 import { LoginRepositoryMemory } from '@infra/repositories/memory'
 
 export function factoryDeleteUseCaseFake (): LoginDeleteUseCase {
