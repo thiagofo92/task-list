@@ -1,5 +1,5 @@
-import { LoginModel } from '@app/models'
+import { LoginModel, LoginCreateModel } from '@app/models'
 
 export interface LoginCreateUseCase {
-  execute: () => Promise<LoginModel>
+  execute: (login: LoginCreateModel) => Promise<LoginModel>
 }

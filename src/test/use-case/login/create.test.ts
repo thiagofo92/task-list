@@ -1,19 +1,19 @@
-import { CreateLoginError } from '@core/repositories/error/login-error'
 import { describe, expect, test } from 'vitest'
-import { factoryCreateUseCaseFake } from './factory-fake/create'
-import { loginMock } from '@infra/repositories/memory/mock/login-mock'
+
+import { CreateLoginError } from '@core/repositories/error/login-error'
+import { factoryCreateUseCase } from './factory-fake/create'
 
 describe('#Login create', () => {
   test('Create login with success', async () => {
-    const usecase = factoryCreateUseCaseFake()
+    const { sut, data } = factoryCreateUseCase()
 
-    const result = await usecase.execute(loginMock)
-    expect(result).toStrictEqual(loginMock)
+    const result = await sut.execute(data)
+    expect(result).toStrictEqual(data)
   })
   test('Generate login error when try to create login', async () => {
-    const usecase = factoryCreateUseCaseFake()
+    const { sut, data } = factoryCreateUseCase()
 
-    const result = usecase.execute(loginMock)
+    const result = sut.execute(data)
     await expect(result).rejects.toThrowError(CreateLoginError)
   })
 })

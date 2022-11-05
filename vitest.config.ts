@@ -16,7 +16,8 @@ export default defineConfig({
       '@app': `${path}/app`,
       '@core': `${path}/core`,
       '@infra': `${path}/infra`,
-      '@shared': `${path}/shared`
+      '@shared': `${path}/shared`,
+      '@test': `${path}/test`
     }
   }
 })

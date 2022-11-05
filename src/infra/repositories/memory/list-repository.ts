@@ -2,11 +2,6 @@ import { ListEntity, ListTypeEntity } from '@core/entities'
 import { ListCreateError, ListFindByIdError } from '@core/repositories/error/list-error'
 import { ListRepository } from '@core/repositories/list-repository'
 import { Either, left, right } from '@shared/errors/Either'
-import { listMock, listTypeAux, listTypeMock } from './mock/list-mock'
-
-const ListType = listTypeMock
-const List = [listMock]
-const ListTypeAux = listTypeAux
 export class ListRepositoryMemory implements ListRepository {
   async create (listEntity: ListEntity, idListType: number[]): Promise<Either<ListCreateError, ListEntity>> {
     try {
