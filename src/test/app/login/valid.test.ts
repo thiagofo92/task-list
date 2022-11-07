@@ -1,42 +1,58 @@
-import { beforeEach, describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 
-import { NotFoundEmailError, NotFoundPasswordError, ValidLoginError } from '@core/repositories/error/login-error'
-import { factoryValidUseCase } from './factory-fake/valid-use-case'
+import { ValidLoginError } from '@core/repositories/error/login-error'
+import { LoginValidUseCase } from '@app/use-case/login'
+import { DbLoginMock } from '../mocks/db-login-mock'
+import { mockLogin } from '@test/core/mocks'
 
-const loginFake = { ...loginMock }
+interface FactoryLoginValidUseCase {
+  sut: LoginValidUseCase
+  dbLogin: DbLoginMock
+}
+
+function factoryValidUseCase (): FactoryLoginValidUseCase {
+  const dbLogin = new DbLoginMock()
+  const sut = new LoginValidUseCase(dbLogin)
+
+  return {
+    sut,
+    dbLogin
+  }
+}
 
 describe('#Login - Valid', () => {
-  beforeEach(() => {
-    loginFake.email = 'test@test.com.br'
-    loginFake.password = '1234'
-  })
-
   test('Success to valid login', async () => {
-    const validLogin = factoryValidUseCase()
-    const isValid = await validLogin.execute(loginFake)
+    const { sut } = factoryValidUseCase()
+    const login = mockLogin()
+    const isValid = await sut.execute(login)
 
     expect(isValid).toStrictEqual(true)
   })
 
   test('Invalid login with password', async () => {
-    const validLogin = factoryValidUseCase()
-    loginFake.password = '123'
-    const isValid = validLogin.execute(loginFake)
+    const { sut } = factoryValidUseCase()
+    const login = mockLogin()
+    login.password = ''
 
-    await expect(isValid).rejects.toThrowError(NotFoundPasswordError)
+    const isValid = await sut.execute(login)
+
+    expect(isValid).toStrictEqual(false)
   })
 
   test('Invalid login with email', async () => {
-    const validLogin = factoryValidUseCase()
-    loginFake.email = ''
-    const isValid = validLogin.execute(loginFake)
+    const { sut } = factoryValidUseCase()
+    const login = mockLogin()
+    login.email = ''
 
-    await expect(isValid).rejects.toThrowError(NotFoundEmailError)
+    const isValid = await sut.execute(login)
+
+    expect(isValid).toStrictEqual(false)
   })
 
   test('Error to valid login', async () => {
-    const validLogin = factoryValidUseCase()
-    const isValid = validLogin.execute(null as any)
+    const { sut, dbLogin } = factoryValidUseCase()
+    vi.spyOn(dbLogin, 'valid').mockRejectedValueOnce(new ValidLoginError('Test valid login'))
+    const isValid = sut.execute({} as any)
 
     await expect(isValid).rejects.toThrowError(ValidLoginError)
   })

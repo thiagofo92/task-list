@@ -24,7 +24,7 @@ export class DbLoginMock implements LoginRepository {
 
   async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
     try {
-      if (login.email) return right(true)
+      if (login.email && login.password) return right(true)
 
       return right(false)
     } catch (error) {
