@@ -9,7 +9,7 @@ import {
   FindAllLoginError,
   FindByIdLoginError
 } from '@core/repositories/error'
-import { faker } from '@faker-js/faker'
+import { mockLogin } from '@test/core/mocks'
 
 export class DbLoginMock implements LoginRepository {
   private readonly login: LoginEntity[] = []
@@ -54,14 +54,7 @@ export class DbLoginMock implements LoginRepository {
 
   async findAll (): Promise<Either<FindAllLoginError, LoginEntity[]>> {
     try {
-      const login = [
-        {
-          id: faker.datatype.uuid(),
-          email: faker.internet.email(),
-          password: faker.internet.password(16),
-          name: faker.name.firstName()
-        }
-      ]
+      const login = [mockLogin()]
       return right(login)
     } catch (error) {
       return left(new FindAllLoginError('Find all login Mock'))
@@ -72,12 +65,7 @@ export class DbLoginMock implements LoginRepository {
     try {
       if (!id) return right(null)
 
-      const login = {
-        id: faker.datatype.uuid(),
-        email: faker.internet.email(),
-        password: faker.internet.password(16),
-        name: faker.name.firstName()
-      }
+      const login = mockLogin()
 
       return right(login)
     } catch (error) {
