@@ -1,7 +1,7 @@
-import { NotFoundEmailError, NotFoundPasswordError, ValidLoginError } from '@core/repositories/error/login-error'
 import { beforeEach, describe, expect, test } from 'vitest'
+
+import { NotFoundEmailError, NotFoundPasswordError, ValidLoginError } from '@core/repositories/error/login-error'
 import { factoryValidUseCase } from './factory-fake/valid-use-case'
-import { loginMock } from '@infra/repositories/memory/mock/login-mock'
 
 const loginFake = { ...loginMock }
 

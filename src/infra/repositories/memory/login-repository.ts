@@ -13,8 +13,10 @@ import { LoginModel } from '@app/models/login'
 import { LoginEntity } from '@core/entities/LoginEntity'
 import { LoginRepository } from '@core/repositories/login'
 import { Either, left, right } from '@shared/errors/Either'
+
+const LOGIN_MEMORY: LoginEntity[] = []
 export class LoginRepositoryMemory implements LoginRepository {
-  private readonly loginMemory: LoginEntity [] = []
+  private readonly loginMemory: LoginEntity [] = LOGIN_MEMORY
 
   async create (login: LoginEntity): Promise<Either<CreateLoginError, LoginModel>> {
     try {
@@ -43,7 +45,7 @@ export class LoginRepositoryMemory implements LoginRepository {
   async update (login: LoginEntity): Promise<Either<UpdateLoginError, boolean>> {
     try {
       const index = this.loginMemory.findIndex(item => item.id === login.id)
-      if (index < 0) return left(new NotFoundIdUpdateLoginError('IdNotFound'))
+      if (index < 0) return right(true)
 
       this.loginMemory[index].password = login.password
 

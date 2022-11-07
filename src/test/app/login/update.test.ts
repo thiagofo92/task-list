@@ -1,7 +1,7 @@
-import { NotFoundIdUpdateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
 import { describe, test, expect, beforeEach } from 'vitest'
+
+import { NotFoundIdUpdateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
 import { factoryUpdateUseCaseFake } from './factory-fake/update'
-import { loginMock } from '@infra/repositories/memory/mock/login-mock'
 
 const LoginMock = { ...loginMock }
 
