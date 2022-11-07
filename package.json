@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "vitest",
-    "test:one": "vitest find-by-id.test.ts",
+    "test:one": "vitest update.test.ts",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint ./src --ext .ts"
   }

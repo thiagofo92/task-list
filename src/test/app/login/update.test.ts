@@ -1,35 +1,49 @@
-import { describe, test, expect, beforeEach } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 
-import { NotFoundIdUpdateLoginError, UpdateLoginError } from '@core/repositories/error/login-error'
-import { factoryUpdateUseCaseFake } from './factory-fake/update'
+import { UpdateLoginError } from '@core/repositories/error/login-error'
+import { LoginUpdateUseCase } from '@app/use-case/login/update'
+import { DbLoginMock } from '../mocks/db-login-mock'
+import { mockLogin } from '@test/core/mocks'
 
-const LoginMock = { ...loginMock }
+interface FactoryLoginUpdateUseCase {
+  sut: LoginUpdateUseCase
+  dbLogin: DbLoginMock
+}
+
+function factoryUpdateUseCase (): FactoryLoginUpdateUseCase {
+  const dbLogin = new DbLoginMock()
+  const sut = new LoginUpdateUseCase(dbLogin)
+
+  return {
+    sut,
+    dbLogin
+  }
+}
 
 describe('# Login - Update', () => {
-  beforeEach(() => {
-    LoginMock.id = loginMock.id
-    LoginMock.email = loginMock.email
-    LoginMock.password = loginMock.password
-  })
   test('Success to upate password', async () => {
-    const usecase = factoryUpdateUseCaseFake()
-    const result = await usecase.execute(LoginMock)
+    const { sut } = factoryUpdateUseCase()
+    const login = mockLogin()
+    const result = await sut.execute(login)
 
     expect(result).toStrictEqual(true)
   })
 
-  test('Error to upate password', async () => {
-    const usecase = factoryUpdateUseCaseFake()
-    const result = usecase.execute(LoginMock)
+  test('Id not found', async () => {
+    const { sut } = factoryUpdateUseCase()
+    const login = mockLogin()
+    login.id = ''
+    const result = await sut.execute(login)
 
-    await expect(result).rejects.toThrowError(UpdateLoginError)
+    await expect(result).toStrictEqual(false)
   })
 
-  test('Error to find id', async () => {
-    LoginMock.id = ''
-    const usecase = factoryUpdateUseCaseFake()
-    const result = usecase.execute(LoginMock)
+  test('Error to update user', async () => {
+    const { sut, dbLogin } = factoryUpdateUseCase()
+    vi.spyOn(dbLogin, 'update').mockRejectedValueOnce(new UpdateLoginError('Test update login'))
 
-    await expect(result).rejects.toThrowError(NotFoundIdUpdateLoginError)
+    const result = sut.execute({} as any)
+
+    await expect(result).rejects.toThrowError(UpdateLoginError)
   })
 })
