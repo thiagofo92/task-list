@@ -2,9 +2,10 @@ import { ListCreateGateway } from '@app/gateway/list-gateway'
 import { ListCreateModel } from '@app/gateway/models/list-model'
 import { ListCreatePresenter } from '@app/presenter'
 import { ListCreateModelPresenter } from '@app/presenter/models/list-create-model'
+import { ListCreateaUseCaseContract } from '@core/contract/list/create-lista-use-case'
 import { ListRepository } from '@core/repositories/list-repository'
 
-export class ListCreateUseCase {
+export class ListCreateUseCase implements ListCreateaUseCaseContract {
   constructor (
     private readonly listRepository: ListRepository,
     private readonly listCreateGateway: ListCreateGateway,

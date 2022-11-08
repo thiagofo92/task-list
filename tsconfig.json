@@ -29,7 +29,8 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "node_module"
+    "node_module",
+    "vitest.config.ts"
   ],
-  "include": ["src", "vitest.config.ts"]
+  "include": ["src"]
 }
