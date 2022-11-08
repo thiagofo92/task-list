@@ -1,6 +1,7 @@
 export interface ListEntity {
   id?: number
   idLogin: string
+  idTypes: number[]
   description: string
 }
 

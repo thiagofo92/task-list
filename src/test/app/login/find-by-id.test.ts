@@ -2,7 +2,7 @@ import { describe, test, expect, vi } from 'vitest'
 
 import { FindByIdLoginError } from '@core/repositories/error/login-error'
 import { LoginFindByIdUseCase } from '@app/use-case/login/find-by-id'
-import { DbLoginMock } from '../mocks/db-login-mock'
+import { DbLoginMock } from '../../infra/db/mocks/db-login-mock'
 import { mockLogin } from '@test/core/mocks'
 
 interface FactoryLoginFindByIdUseCase {

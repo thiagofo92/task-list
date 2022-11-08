@@ -2,7 +2,7 @@ import { describe, test, expect, vi } from 'vitest'
 
 import { DeleteLoginError } from '@core/repositories/error/login-error'
 import { LoginDeleteUseCase } from '@app/use-case/login/delete'
-import { DbLoginMock } from '../mocks/db-login-mock'
+import { DbLoginMock } from '../../infra/db/mocks/db-login-mock'
 import { mockLogin } from '@test/core/mocks'
 
 interface FactoryLoginDeleteUseCase {

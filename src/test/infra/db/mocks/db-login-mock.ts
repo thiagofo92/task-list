@@ -1,4 +1,4 @@
-import { LoginEntity } from '@core/entities'
+import { LoginEntity, LoginValidEntity } from '@core/entities'
 import { LoginRepository } from '@core/repositories'
 import { Either, left, right } from '@shared/errors/Either'
 import {
@@ -22,7 +22,7 @@ export class DbLoginMock implements LoginRepository {
     }
   }
 
-  async valid (login: LoginEntity): Promise<Either<ValidLoginError, boolean>> {
+  async valid (login: LoginValidEntity): Promise<Either<ValidLoginError, boolean>> {
     try {
       if (login.email && login.password) return right(true)
 

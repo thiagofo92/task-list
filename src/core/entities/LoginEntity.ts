@@ -5,6 +5,8 @@ interface Login {
   password: string
   name: string
 }
+
+export type LoginValidEntity = Omit<LoginEntity, 'name' | 'id'>
 export class LoginEntity {
   id: string
   email: string

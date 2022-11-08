@@ -3,7 +3,7 @@ import { describe, test, expect, vi } from 'vitest'
 import { LoginFindAllUseCase } from '@app/use-case/login/find-all'
 import { LoginEntity } from '@core/entities'
 import { FindAllLoginError } from '@core/repositories/error/login-error'
-import { DbLoginMock } from '../mocks/db-login-mock'
+import { DbLoginMock } from '../../infra/db/mocks/db-login-mock'
 
 interface FactoryLoginFindAllUseCase {
   sut: LoginFindAllUseCase

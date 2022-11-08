@@ -2,7 +2,7 @@ import { describe, test, expect, vi } from 'vitest'
 
 import { UpdateLoginError } from '@core/repositories/error/login-error'
 import { LoginUpdateUseCase } from '@app/use-case/login/update'
-import { DbLoginMock } from '../mocks/db-login-mock'
+import { DbLoginMock } from '../../infra/db/mocks/db-login-mock'
 import { mockLogin } from '@test/core/mocks'
 
 interface FactoryLoginUpdateUseCase {

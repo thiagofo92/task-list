@@ -1,28 +1,22 @@
-import { ListCreateGateway } from '@app/gateway/list-gateway'
-import { ListCreateModel } from '@app/gateway/models/list-model'
-import { ListCreatePresenter } from '@app/presenter'
-import { ListCreateModelPresenter } from '@app/presenter/models/list-create-model'
+import { ListCreateModel } from '@app/models/list-model'
 import { ListCreateaUseCaseContract } from '@core/contract/list/create-use-case'
+import { ListEntity } from '@core/entities'
 import { ListRepository } from '@core/repositories/list-repository'
 
 export class ListCreateUseCase implements ListCreateaUseCaseContract {
   constructor (
-    private readonly listRepository: ListRepository,
-    private readonly listCreateGateway: ListCreateGateway,
-    private readonly listCreatePresenter: ListCreatePresenter
+    private readonly listRepository: ListRepository
   ) {}
 
-  async execute (listModel: ListCreateModel): Promise<ListCreateModelPresenter> {
-    const list = this.listCreateGateway.toDto(listModel)
-    const listCreated = await this.listRepository.create(list.listEntity, list.idListType)
+  async execute (listModel: ListCreateModel): Promise<ListEntity> {
+    const list: ListEntity = {
+      ...listModel,
+      idTypes: listModel.type
+    }
+
+    const listCreated = await this.listRepository.create(list)
     if (listCreated.isLeft()) throw listCreated.value
 
-    const types = await this.listRepository.findAllTypeById(listCreated.value.id!)
-
-    if (types.isLeft()) throw types.value
-
-    const listPresenter = this.listCreatePresenter.execute(listCreated.value, types.value)
-
-    return listPresenter
+    return listCreated.value
   }
 }
