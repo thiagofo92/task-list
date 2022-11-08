@@ -2,7 +2,7 @@ import { ListCreateGateway } from '@app/gateway/list-gateway'
 import { ListCreateModel } from '@app/gateway/models/list-model'
 import { ListCreatePresenter } from '@app/presenter'
 import { ListCreateModelPresenter } from '@app/presenter/models/list-create-model'
-import { ListCreateaUseCaseContract } from '@core/contract/list/create-lista-use-case'
+import { ListCreateaUseCaseContract } from '@core/contract/list/create-use-case'
 import { ListRepository } from '@core/repositories/list-repository'
 
 export class ListCreateUseCase implements ListCreateaUseCaseContract {
