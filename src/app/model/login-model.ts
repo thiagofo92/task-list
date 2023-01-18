@@ -4,6 +4,17 @@ export interface LoginCreationInModel {
   password: string
 }
 
+export interface LoginUpdateInModel {
+  id: string
+  nickName: string
+  password: string
+}
+
+export interface LoginUpdateOutModel {
+  nickName: string
+  password: string
+}
+
 export interface LoginAuthenticationInModel {
   email: string
   password: string
