@@ -1,4 +1,4 @@
-import { LoginCreationInModel, LoginCreationOutModel, LoginFetchOutModel, LoginAuthenticationInModel } from '@app/model'
+import { LoginCreationInModel, LoginCreationOutModel, LoginFetchOutModel, LoginAuthenticationInModel, LoginUpdateInModel, LoginUpdateOutModel } from '@app/model'
 import { LoginRepository } from '@core/repositories/'
 
 export class LoginMockService implements LoginRepository {
@@ -13,6 +13,20 @@ export class LoginMockService implements LoginRepository {
     }
 
     return result
+  }
+
+  async update (login: LoginUpdateInModel): Promise<LoginUpdateOutModel | null> {
+    const index = this.loginMock.findIndex(item => item.id === login.id)
+
+    if (!index) return null
+
+    this.loginMock[index].nickName = login.nickName
+    this.loginMock[index].password = login.password
+
+    return {
+      nickName: this.loginMock[index].nickName,
+      password: this.loginMock[index].password
+    }
   }
 
   async findAll (): Promise<LoginFetchOutModel[]> {
@@ -37,6 +51,14 @@ export class LoginMockService implements LoginRepository {
       email: result?.email,
       nickName: result?.nickName
     }
+  }
+
+  async findByEmail (email: string): Promise<LoginFetchOutModel | null> {
+    const result = this.loginMock.find(item => item.email === email)
+
+    if (!result) return null
+
+    return result
   }
 
   async findByLoginAndPassword (login: LoginAuthenticationInModel): Promise<boolean> {
