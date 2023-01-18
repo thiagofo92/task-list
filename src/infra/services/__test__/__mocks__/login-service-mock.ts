@@ -1,4 +1,11 @@
-import { LoginCreationInModel, LoginCreationOutModel, LoginFetchOutModel, LoginAuthenticationInModel, LoginUpdateInModel, LoginUpdateOutModel } from '@app/model'
+import {
+  LoginCreationInModel,
+  LoginCreationOutModel,
+  LoginFetchOutModel,
+  LoginAuthenticationInModel,
+  LoginUpdateInModel,
+  LoginUpdateOutModel
+} from '@app/model'
 import { LoginRepository } from '@core/repositories/'
 
 export class LoginMockService implements LoginRepository {
