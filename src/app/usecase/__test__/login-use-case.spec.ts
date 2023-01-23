@@ -20,12 +20,13 @@ describe('# Login Use case', () => {
     const login: LoginCreationInModel = {} as any
 
     const result = await sut.create(login)
-    const expected = ''
+    const expected = { id: '1' }
 
     expect(result).toStrictEqual(expected)
   })
+
   test.todo('Sucess to update login')
-  test.todo('Sucess to authentica the login and password')
+  test.todo('Sucess to authenticate the login and password')
   test.todo('Sucess to find all login')
   test.todo('Sucess to find login by id')
   test.todo('Sucess to find login by email')
