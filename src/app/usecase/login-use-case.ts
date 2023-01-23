@@ -3,7 +3,7 @@ import { LoginRepository } from '@core/repositories'
 import { LoginUseCaseContract } from '@core/usecase'
 import { Either, left, right } from '@shared/error/etheir'
 import { LoginUseCaseCreationError, LoginUseCaseUpdateError } from './errors/login-error'
-import { LoginUpdateError } from '@infra/services/error/login-error'
+import { LoginFindAllError, LoginUpdateError } from '@infra/services/error/login-error'
 import { LoginCreationOutModel } from '@app/model/output'
 
 export class LoginUseCase implements LoginUseCaseContract {
@@ -19,6 +19,14 @@ export class LoginUseCase implements LoginUseCaseContract {
 
   async update (login: LoginUpdateInModel): Promise<Either<LoginUpdateError, unknown>> {
     const successOrError = await this.loginService.update(login)
+
+    if (successOrError.isLeft()) return left(new LoginUseCaseUpdateError(successOrError.value.message))
+
+    return right(successOrError.value)
+  }
+
+  async findAll (): Promise<Either<LoginFindAllError, unknown>> {
+    const successOrError = await this.loginService.findAll()
 
     if (successOrError.isLeft()) return left(new LoginUseCaseUpdateError(successOrError.value.message))
 
