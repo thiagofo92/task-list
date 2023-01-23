@@ -4,3 +4,10 @@ export class LoginUseCaseCreationError extends Error {
     this.name = 'LoginUseCaseCraetionError'
   }
 }
+
+export class LoginUseCaseUpdateError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'LoginUseCaseUpdateError'
+  }
+}
