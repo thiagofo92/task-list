@@ -1,8 +1,23 @@
 import { describe, test, expect, vi } from 'vitest'
 import { LoginRepository } from '@core/repositories/login-repository'
-import { LoginAuthenticationInModel, LoginCreationInModel, LoginCreationOutModel, LoginFetchOutModel } from '@app/model'
+import {
+  LoginAuthenticationInModel,
+  LoginCreationInModel,
+  LoginCreationOutModel,
+  LoginFetchOutModel,
+  LoginUpdateInModel,
+  LoginUpdateOutModel
+} from '@app/model'
 
 export class LoginService implements LoginRepository {
+  async update (login: LoginUpdateInModel): Promise<LoginUpdateOutModel | null> {
+    return {} as any
+  }
+
+  async findByEmail (email: string): Promise<LoginFetchOutModel | null> {
+    return {} as any
+  }
+
   async create (login: LoginCreationInModel): Promise<LoginCreationOutModel> {
     return {} as any
   }
