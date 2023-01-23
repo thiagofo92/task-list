@@ -13,7 +13,7 @@ import {
   LoginFindByEmailError,
   LoginFindByIdError,
   LoginUpdateError
-} from '@app/usecase/error/login-error'
+} from '@infra/services/error/login-error'
 import { Either } from '@shared/error/etheir'
 
 export interface LoginRepository {
