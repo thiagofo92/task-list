@@ -49,8 +49,28 @@ describe('# Login Use case', () => {
     const result = await sut.update(loginUpdate)
     expect(result.value).toStrictEqual(expected)
   })
-  test.todo('Sucess to authenticate the login and password')
-  test.todo('Sucess to find all login')
+
+  test('Sucess to find all login', async () => {
+    const { sut } = Factory()
+    const login: LoginCreationInModel = {
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
+    }
+
+    const created = await sut.create(login)
+    const loginCreated = created.value as LoginCreationOutModel
+    const result = await sut.findAll()
+    const expected = {
+      id: loginCreated.id,
+      email: login.email,
+      nickName: login.nickName
+    }
+
+    expect(result.value).toStrictEqual([expected])
+  })
   test.todo('Sucess to find login by id')
   test.todo('Sucess to find login by email')
+
+  test.todo('Sucess to authenticate the login and password')
 })
