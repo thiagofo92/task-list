@@ -7,7 +7,7 @@ import {
 import {
   LoginUpdateOutModel,
   LoginCreationOutModel,
-  LoginFetchOutModel
+  LoginFecthOutModel
 } from '@app/model/output'
 
 import {
@@ -48,31 +48,33 @@ export class LoginMockService implements LoginRepository {
     })
   }
 
-  async findAll (): Promise<Either<LoginFindAllError, LoginFetchOutModel[]>> {
-    const result = this.loginMock.map<LoginFetchOutModel>((value, index) => (
+  async findAll (): Promise<Either<LoginFindAllError, LoginFecthOutModel[]>> {
+    const result = this.loginMock.map<LoginFecthOutModel>((value, index) => (
       {
         id: index.toString(),
         nickName: value.nickName,
-        email: value.email
+        email: value.email,
+        password: value.password
       }
     ))
 
     return right(result)
   }
 
-  async findById (id: string): Promise<Either<LoginFindByIdError, LoginFetchOutModel | null>> {
+  async findById (id: string): Promise<Either<LoginFindByIdError, LoginFecthOutModel | null>> {
     const result = this.loginMock.find(item => item.id === id)
 
     if (!result) return right(null)
 
     return right({
-      id: result?.id,
-      email: result?.email,
-      nickName: result?.nickName
+      id: result.id,
+      email: result.email,
+      nickName: result.nickName,
+      password: result.password
     })
   }
 
-  async findByEmail (email: string): Promise<Either<LoginFindByEmailError, LoginFetchOutModel | null>> {
+  async findByEmail (email: string): Promise<Either<LoginFindByEmailError, LoginFecthOutModel | null>> {
     const result = this.loginMock.find(item => item.email === email)
 
     if (!result) return right(null)
