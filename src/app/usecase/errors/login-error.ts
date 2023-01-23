@@ -18,3 +18,10 @@ export class LoginUseCaseFindAllError extends Error {
     this.name = 'LoginUseCaseFindAllError'
   }
 }
+
+export class LoginUseCaseFindByIdError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'LoginUseCaseFindByIdError'
+  }
+}
