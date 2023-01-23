@@ -6,6 +6,10 @@ export class LoginUseCase implements LoginUseCaseContract {
   constructor (private readonly loginService: LoginRepository) {}
 
   async create (login: LoginCreationInModel): Promise<unknown> {
-    return ''
+    const successOrError = await this.loginService.create(login)
+
+    if (successOrError.isLeft()) return null
+
+    return successOrError.value
   }
 }
