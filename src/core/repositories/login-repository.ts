@@ -1,11 +1,14 @@
 import {
-  LoginAuthenticationInModel,
-  LoginCreationInModel,
+  LoginFecthOutModel,
   LoginCreationOutModel,
-  LoginFetchOutModel,
-  LoginUpdateInModel,
   LoginUpdateOutModel
-} from '@app/model'
+} from '@app/model/output'
+
+import {
+  LoginUpdateInModel,
+  LoginAuthenticationInModel,
+  LoginCreationInModel
+} from '@app/model/input'
 import {
   LoginCreationError,
   LoginFinByLoginAndPasswordError,
@@ -19,8 +22,8 @@ import { Either } from '@shared/error/etheir'
 export interface LoginRepository {
   create: (login: LoginCreationInModel) => Promise<Either<LoginCreationError, LoginCreationOutModel>>
   update: (login: LoginUpdateInModel) => Promise<Either<LoginUpdateError, LoginUpdateOutModel | null>>
-  findAll: () => Promise<Either<LoginFindAllError, LoginFetchOutModel[]>>
-  findById: (id: string) => Promise<Either<LoginFindByIdError, LoginFetchOutModel | null>>
-  findByEmail: (email: string) => Promise<Either<LoginFindByEmailError, LoginFetchOutModel | null>>
+  findAll: () => Promise<Either<LoginFindAllError, LoginFecthOutModel[]>>
+  findById: (id: string) => Promise<Either<LoginFindByIdError, LoginFecthOutModel | null>>
+  findByEmail: (email: string) => Promise<Either<LoginFindByEmailError, LoginFecthOutModel | null>>
   findByLoginAndPassword: (login: LoginAuthenticationInModel) => Promise<Either<LoginFinByLoginAndPasswordError, boolean>>
 }
