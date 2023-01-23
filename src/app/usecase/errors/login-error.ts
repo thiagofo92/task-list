@@ -11,3 +11,10 @@ export class LoginUseCaseUpdateError extends Error {
     this.name = 'LoginUseCaseUpdateError'
   }
 }
+
+export class LoginUseCaseFindAllError extends Error {
+  constructor (message: string) {
+    super(message)
+    this.name = 'LoginUseCaseFindAllError'
+  }
+}
