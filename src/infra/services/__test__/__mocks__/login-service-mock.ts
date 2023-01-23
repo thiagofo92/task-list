@@ -1,11 +1,15 @@
 import {
   LoginCreationInModel,
-  LoginCreationOutModel,
-  LoginFetchOutModel,
   LoginAuthenticationInModel,
-  LoginUpdateInModel,
-  LoginUpdateOutModel
-} from '@app/model'
+  LoginUpdateInModel
+} from '@app/model/input'
+
+import {
+  LoginUpdateOutModel,
+  LoginCreationOutModel,
+  LoginFetchOutModel
+} from '@app/model/output'
+
 import {
   LoginCreationError,
   LoginFinByLoginAndPasswordError,
@@ -13,7 +17,7 @@ import {
   LoginFindByEmailError,
   LoginFindByIdError,
   LoginUpdateError
-} from '@app/usecase/error/login-error'
+} from '@infra/services/error/login-error'
 import { LoginRepository } from '@core/repositories/'
 import { Either, right } from '@shared/error/etheir'
 
