@@ -24,13 +24,12 @@ import { Either, right } from '@shared/error/etheir'
 export class LoginMockService implements LoginRepository {
   private readonly loginMock: Array<{ id: string } & LoginCreationInModel> = []
   async create (login: LoginCreationInModel): Promise<Either<LoginCreationError, LoginCreationOutModel>> {
+    const id = String(this.loginMock.length)
     this.loginMock.push({
-      id: this.loginMock.length.toString(),
+      id,
       ...login
     })
-    const result: LoginCreationOutModel = {
-      id: this.loginMock.length.toString()
-    }
+    const result: LoginCreationOutModel = { id }
 
     return right(result)
   }
@@ -38,7 +37,7 @@ export class LoginMockService implements LoginRepository {
   async update (login: LoginUpdateInModel): Promise<Either<LoginUpdateError, LoginUpdateOutModel | null>> {
     const index = this.loginMock.findIndex(item => item.id === login.id)
 
-    if (!index) return right(null)
+    if (index < 0) return right(null)
 
     this.loginMock[index].nickName = login.nickName
     this.loginMock[index].password = login.password
