@@ -1,23 +1,34 @@
-import { LoginMockService } from '@infra/services/__test__/__mocks__/login-service-mock'
-import { describe, test, expect } from 'vitest'
+import { describe, test, expect, vi, beforeEach, MockedObject } from 'vitest'
 import { LoginUseCase } from '../login-use-case'
 import { LoginCreationInModel, LoginUpdateInModel } from '@app/model/input'
 import { LoginCreationOutModel } from '@app/model/output'
-
+import { LoginContractRepository } from '@core/repositories'
+import { LoginCreationError } from '@infra/repositories/error/login-error'
+import { LoginRepository } from '@infra/repositories'
+import { right } from '@shared/error/etheir'
 interface FactoryLogin {
   sut: LoginUseCase
+  repositoryMocked: MockedObject<LoginContractRepository>
 }
 
+vi.mock('@infra/repositories/login-repository')
+
 function Factory (): FactoryLogin {
-  const service = new LoginMockService()
-  const sut = new LoginUseCase(service)
-  return { sut }
+  const repositoryMocked = vi.mocked(new LoginRepository())
+  const sut = new LoginUseCase(repositoryMocked)
+  return { sut, repositoryMocked }
 }
 
 describe('# Login Use case', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
+
   test('Sucess to create login', async () => {
-    const { sut } = Factory()
+    const { sut, repositoryMocked } = Factory()
     const login: LoginCreationInModel = {} as any
+
+    repositoryMocked.create.mockResolvedValueOnce(right({ id: '0' }))
 
     const result = await sut.create(login)
     const expected = { id: '0' }
@@ -25,68 +36,115 @@ describe('# Login Use case', () => {
     expect(result.value).toStrictEqual(expected)
   })
 
-  test('Sucess to update login', async () => {
-    const { sut } = Factory()
-    const login: LoginCreationInModel = {
-      password: 'test',
-      email: 'test@test',
-      nickName: 'test_test'
-    }
+  test('Error to create login', async () => {
+    const { sut, repositoryMocked } = Factory()
 
-    const created = await sut.create(login)
-    const loginCreated = created.value as LoginCreationOutModel
+    const login: LoginCreationInModel = {} as any
+
+    const result = await sut.create(login)
+
+    expect(result.value).instanceOf(LoginCreationError)
+  })
+
+  test('Sucess to update login', async () => {
+    const { sut, repositoryMocked } = Factory()
     const loginUpdate: LoginUpdateInModel = {
-      id: loginCreated.id,
+      id: '0',
       nickName: 'Updated test',
       password: 'Updated password'
     }
 
+    repositoryMocked.update.mockResolvedValueOnce(
+      right({
+        nickName: 'Updated test',
+        password: 'Updated password'
+      }))
+
+    const result = await sut.update(loginUpdate)
     const expected = {
       nickName: loginUpdate.nickName,
       password: loginUpdate.password
     }
 
-    const result = await sut.update(loginUpdate)
     expect(result.value).toStrictEqual(expected)
   })
 
   test('Sucess to find all login', async () => {
-    const { sut } = Factory()
-    const login: LoginCreationInModel = {
+    const { sut, repositoryMocked } = Factory()
+
+    repositoryMocked.findAll.mockResolvedValueOnce(right([{
+      id: '0',
       password: 'test',
       email: 'test@test',
       nickName: 'test_test'
-    }
+    }]))
 
-    const created = await sut.create(login)
-    const loginCreated = created.value as LoginCreationOutModel
     const result = await sut.findAll()
     const expected = {
-      id: loginCreated.id,
-      ...login
+      id: '0',
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
     }
 
     expect(result.value).toStrictEqual([expected])
   })
+
   test('Sucess to find login by id', async () => {
-    const { sut } = Factory()
+    const { sut, repositoryMocked } = Factory()
+
+    repositoryMocked.findById.mockResolvedValueOnce(right({
+      id: '0',
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
+    }))
+
+    const result = await sut.findById('0')
+    const expected = {
+      id: '0',
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
+    }
+
+    expect(result.value).toStrictEqual(expected)
+  })
+
+  test('Sucess to find login by email', async () => {
+    const { sut, repositoryMocked } = Factory()
+
+    repositoryMocked.findByEmail.mockResolvedValueOnce(right({
+      id: '0',
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
+    }))
+
+    const result = await sut.findByEmail('test@test')
+    const expected = {
+      id: '0',
+      password: 'test',
+      email: 'test@test',
+      nickName: 'test_test'
+    }
+
+    expect(result.value).toStrictEqual(expected)
+  })
+
+  test('Sucess to authenticate the login and password', async () => {
+    const { sut, repositoryMocked } = Factory()
     const login: LoginCreationInModel = {
       password: 'test',
       email: 'test@test',
       nickName: 'test_test'
     }
 
-    const created = await sut.create(login)
-    const loginCreated = created.value as LoginCreationOutModel
-    const result = await sut.findById(loginCreated.id)
-    const expected = {
-      id: loginCreated.id,
-      ...login
-    }
+    repositoryMocked.authenticationLogin.mockResolvedValueOnce(right(true))
+
+    const result = await sut.authenticationLogin({ email: login.email, password: login.password })
+    const expected = true
 
     expect(result.value).toStrictEqual(expected)
   })
-  test.todo('Sucess to find login by email')
-
-  test.todo('Sucess to authenticate the login and password')
 })
