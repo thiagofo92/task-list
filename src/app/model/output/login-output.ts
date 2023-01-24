@@ -2,7 +2,7 @@ export interface LoginUpdateOutModel {
   nickName: string
   password: string
 }
-export interface LoginFecthOutModel {
+export interface LoginFetchOutModel {
   id: string
   nickName: string
   email: string
